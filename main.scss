@@ -1,0 +1,499 @@
+//Standards
+$background: linear-gradient(90deg, #ed284b 0%, #20a2d5 100%);
+$imageBorder: 0px 0px 30px 30px;
+$contactColor: #88D8FF;
+$paginationColor1: linear-gradient(to right, #000000 0%,#000000 70%,#EE2455 70%,#EE2455 100%);
+$paginationColor2: linear-gradient(to right, #EE2455  0%,#EE2455  30%,#000000 30%,#000000 100%);
+// Mixins
+@mixin font {
+  font-family: 'Montserrat';
+  font-size: 20px;
+  letter-spacing: 0px;
+}
+@mixin topIcons {
+  font-size: 2.5rem;
+  padding: 2rem;
+  padding-left: 3rem;
+  cursor: pointer;
+}
+@mixin buttonStyle1 {
+  border-radius: 50px;
+  font-size: 1rem;
+  width: 11rem;
+  height: 4rem;
+  font-family: "monospace";
+  padding: 10px;
+  letter-spacing: 4.65px;
+}
+@mixin buttonStyle2 {
+  @include buttonStyle1;
+  color: #2F98CB;
+  border: 1px solid #2F98CB;
+  background-color:#FFFFFF;
+}
+@mixin inputStyle {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+  resize: vertical;
+  margin-right: 20px;
+}
+@mixin pagination {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  @include font;
+  font-weight: 200;
+  position: relative;
+  text-align: center;
+  span{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background:none;
+    transform-origin: 0 0;
+    transform: rotate(-90deg);
+    margin-left: 3.5rem;
+    &::before{
+      position: absolute;
+      left: -30px;
+      top: -10px;
+      content: " ";
+      width: 10rem;
+      height: 7px;
+      border-radius: 35px;
+      transition: all 0.2s ease-in-out;
+      transition-delay: 4s;
+    }
+  }
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+h1{
+  @include font;
+  font-size: 40px;
+  opacity: 100%;
+  color: #2f98cb;
+}
+h3{
+  @include font;
+  font-weight: 300;
+  font-size: 30px;
+  color: #454545;
+  line-height: 2rem;
+  opacity: 100%;
+}
+/* root grid */
+.root {
+  display: grid;
+  grid-template-columns: 15% 30% 45% 10%;
+  grid-template-rows: 70% 30%;
+  column-gap: 10px;
+  row-gap: 5rem;
+  max-width: 100%;
+}
+.menu {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  padding: 2rem;
+}
+.menu .ham-menu {
+  @include topIcons;
+}
+.menu .list {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.menu .list li {
+  @include font;
+  font-weight: 800;
+  list-style: none;
+  margin-top: 20px;
+  font-size: 25px;
+  color: #000000;
+  text-transform: capitalize;
+  opacity: 1;
+}
+.menu .list li a {
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+}
+.menu .list li a:visited{
+  color: #000000;
+}
+.menu .list li .active{
+  color: #000000;
+  &::after {
+    position: absolute;
+    top: 100%;
+    left: 0px;
+    content: " ";
+    width: 100%;
+    height: 5px;
+    background-image: linear-gradient(90deg, #ed284b 0%, #20a2d5 100%);
+    border-radius: 35px;
+    animation: boder ease-in 1s;
+    animation-fill-mode: forwards;
+  }
+}
+//Pagination
+.pagination {
+@include pagination;
+span{
+  &::before{
+    background: $paginationColor1;
+  }
+}
+}
+.pagination-2{
+  @include pagination;
+  span {
+    &::before{
+      background:$paginationColor2 ;
+    }
+  }
+}
+//Image part
+.image-contact {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  img {
+    width: 100%;
+    height: 550px;
+    border-radius: $imageBorder;
+  }
+  button {
+    @include buttonStyle1;
+    margin-top: 8rem;
+    letter-spacing: 4.65px;
+color: #FFFFFF;
+text-transform: capitalize;
+background-color: #EE2455;
+border: none;
+  }
+}
+/* Information part */
+.info {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row: 1/2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2rem;
+  margin-top: 10rem;
+  h1 {
+    &::after {
+      content: " ";
+      position: absolute;
+      display: block;
+      width: 23.5rem;
+      border: 1px solid #d2d2d2;
+      opacity: 0.77;
+      animation: slideFromTop 1s;
+    }
+  }
+  h3 {
+    animation: slideFromTop 1s;
+    span {
+      color: #ee2455;
+      font-weight: 800;
+    }
+  }
+  button{
+    @include buttonStyle2;
+    margin-top: 7rem;
+  }
+  p {
+    @include font;
+    padding-left: 5rem;
+    font-weight: 300;
+    color: #929292;
+    opacity: 77%;
+    animation: slideFromTopp ease-in 0.5s;
+  }
+}
+
+h1 .s1 {
+  color: #dc2d5f;
+}
+h1 .s2 {
+  color: #a64f81;
+}
+h1 .s3 {
+  color: #5c7daf;
+}
+
+// Icons panel
+.icons{
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row: 1/2;
+  margin-right: 10rem;
+}
+.icons .icon-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10rem;
+  padding-left: 3rem;
+}
+.icons .search {
+  grid-row-start: 1;
+  grid-row-end: 1;
+}
+.icon-list {
+  .items {
+    margin-top: 2rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+  }
+}
+.icons .search {
+  @include topIcons;
+}
+.icons .items .fa-instagram {
+  background: transparent
+    linear-gradient(43deg, #ffcb00 0%, #b001a8 100%, #000000 100%) 0% 0%
+    no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+// Contact Us Page CSS
+//1. Banner
+.banner{
+  grid-column:2/4;
+  grid-row: 1/1;
+  position: relative;
+  overflow: hidden;
+  background: #95D7D7;
+  height: 300px;
+  border-radius: $imageBorder;
+  width: 95%;
+  animation: fadeIn ease-in 0.47s;
+  h1{
+    margin-left: 3rem;
+  }
+}
+
+
+.banner .banner-text1{
+  @include font;
+  font-weight: 700;
+  margin-left: 4rem;
+  margin-top: 2rem;
+}
+.banner .banner-text2{
+  @include font;
+  font-weight: 700;
+  margin-left: 8rem;
+}
+.banner-text{
+  animation: slideFromRight ease-in-out 0.5s;
+}
+
+.banner::before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+  opacity: 0.35;
+  background-image: url('banner-img.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.banner .row {
+  z-index: 999;
+}
+// 2. CONTACT BOX
+.contact-box{
+  grid-column: 2/4;
+  grid-row: 1/2;
+  border-radius: 35px;
+  border: 1px solid black;
+  height: 600px;
+  width: 80%;
+  margin-left: 5rem;
+  z-index: 9999999;
+  margin-top: 10rem;
+  background: #FFFFFF;
+  animation: jumpsUp ease-in 0.5s;
+}
+.contact-box .query-box{
+  width: 50%;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+//Query BOX
+.query-box{
+  padding: 1rem;
+  h3{
+    @include font;
+    font-size: 30px;
+    text-align: center;
+    color: $contactColor;
+    padding-bottom: 1rem;
+  }
+
+}
+.query-box .container {
+   label{
+  @include font;
+  color: $contactColor;
+  margin-top: 15px;
+}
+button{
+  @include buttonStyle2;
+  margin-top: 10px;
+  margin-left: 6rem;
+  border: 4px solid #2F98CB;
+}
+input[type=text]{
+  @include inputStyle;
+  }
+  textarea{
+    @include inputStyle;
+    border-radius: 30px;
+  }
+}
+.query-box .container .row >div{
+  margin-right: 20px;
+}
+
+
+//INFO_BOX
+.info-box{
+  overflow: hidden;
+  border-radius: 35px;
+  height: 600px;
+  background-image: url('contact.svg');
+  background-repeat: no-repeat;
+  background-size: 77% 862px;
+  background-color: #88D8FF;
+  padding-left: 10px;
+}
+.info-box .content{
+  margin: 2rem;
+  z-index: 9999;
+  h3{
+    color: #FFFFFF;
+    padding-bottom: 2rem;
+    text-align: center;
+    font-weight: 900;
+  }
+}
+.info-box .text{
+  @include font;
+  color: #FFFFFF;
+  margin-left: 3rem;
+}
+.info-box .row{
+  margin-top: 1.5rem;
+}
+.info-box .row i{
+  color: #FFFFFF;
+  margin-left: 3rem;
+  font-size: 1.5rem;
+}
+
+
+// All the Animations 
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes jumpsUp{
+  0%{
+    transform: translateY(100%);
+  }
+  100%{
+    transform: translateY(0);
+  }
+}
+@keyframes slideFromRight{
+  0%{
+    transform: translateX(100%);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+@keyframes slideFromLeft{
+  0%{
+    transform: translateX(-100%);
+  }
+  100%{
+    transform: translateX(0);
+  }
+}
+@keyframes boder{
+  from {width: 0px;}
+  to {width:100%}
+}
+@keyframes appearsTilt{
+  0%{
+    opacity: 0;
+    margin-left: 100px;
+    margin-top: 30rem;
+    transform: translateY(100%);
+  }
+  100%{
+    opacity: 1;
+    margin-left: 600px;
+    margin-top: 10rem;
+    transform: translateY(0);
+  }
+}
+@keyframes slideFromTop {
+  0%{
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideFromTopp {
+  0%{
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
